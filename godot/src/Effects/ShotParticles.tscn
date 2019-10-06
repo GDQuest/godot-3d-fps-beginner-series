@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/materials/sparkles.tres" type="Material" id=1]
+
+[sub_resource type="Curve" id=1]
+max_value = 0.5
+_data = [ Vector2( 0.0158402, 0.0219928 ), 0.0, 0.0, 0, 0, Vector2( 0.992654, 0.131883 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 0.1
+spread = 90.0
+gravity = Vector3( 0, -10, 0 )
+initial_velocity = 7.0
+initial_velocity_random = 0.4
+scale = 0.4
+scale_random = 0.12
+scale_curve = SubResource( 2 )
+
+[sub_resource type="SphereMesh" id=4]
+material = ExtResource( 1 )
+radius = 0.5
+height = 1.0
+radial_segments = 8
+rings = 4
+
+[sub_resource type="Animation" id=5]
+resource_name = "Fire"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[node name="Particles" type="Particles"]
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 0.95
+randomness = 0.5
+visibility_aabb = AABB( -3.69224, -1.97864, -3.57817, 7.38447, 3.95728, 7.15633 )
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Fire"
+anims/Fire = SubResource( 5 )

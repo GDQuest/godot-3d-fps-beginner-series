@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/Demo.gd" type="Script" id=1]
-[ext_resource path="res://src/Effects/hitDecal3D.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Effects/ShootParticle.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/DemoEnvironment.tres" type="Environment" id=5]
+[ext_resource path="res://src/Effects/ShotImpact.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Effects/ShotParticles.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Interface/DebugInterface.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/DemoEnvironment.tres" type="Environment" id=6]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 50, 1, 50 )
@@ -28,6 +29,11 @@ rim_tint = 0.5
 script = ExtResource( 1 )
 hit_effect = ExtResource( 2 )
 hit_particle = ExtResource( 3 )
+
+[node name="InterfaceLayer" parent="." instance=ExtResource( 4 )]
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1612, 12.3324 )
 
 [node name="Ground" type="StaticBody" parent="."]
 editor/display_folded = true
@@ -93,10 +99,8 @@ use_in_baked_light = true
 mesh = SubResource( 4 )
 material/0 = SubResource( 5 )
 
-[node name="Player" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1612, 12.3324 )
-
 [node name="Lighting" type="Spatial" parent="."]
+editor/display_folded = true
 
 [node name="DirectionalLight" type="DirectionalLight" parent="Lighting"]
 transform = Transform( -0.461846, 0.615026, -0.639094, -0.186166, 0.637276, 0.747811, 0.867203, 0.464351, -0.179827, 0, 26.005, 0 )
@@ -108,7 +112,7 @@ shadow_enabled = true
 extents = Vector3( 73.0007, 29.6759, 60.0894 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
-environment = ExtResource( 5 )
+environment = ExtResource( 6 )
 
 [node name="OmniLight" type="OmniLight" parent="Lighting"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.14901, 5.20605, 25.789 )

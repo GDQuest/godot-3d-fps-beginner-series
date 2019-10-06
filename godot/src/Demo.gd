@@ -17,6 +17,10 @@ export var hit_effect: PackedScene
 export var hit_particle: PackedScene
 
 
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
 func generate_hit_effect(hit_position: Vector3, hit_rotation: Vector3)->void:
 	var temp = hit_effect.instance()
 	temp.translation = hit_position
