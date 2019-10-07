@@ -5,24 +5,6 @@ This is a simple first person controller
 that moves the character in relation to
 the direction the camera is pointing with
 WASD and the left joystick.
-
-I added the jump physics here as well, 
-they seem to be too small for its own video
-but I'd like feedback.
-
-I added two different functions for the camera.
-The joypad version works pretty well, but the
-mouse one makes me nauseous.  That's why I 
-added the debug labels and the reticle.
-
-I added a raycast as a child of the camera, 
-made a sprite3d for a decal when hitting something
-and a shoot method to tell the scene to make a 
-decal at a specific spot.  The player part seems
-to be working okay, but the decal is being created 
-a bit wonky.
-
-Feedback is appreciated.
 """
 
 
@@ -69,8 +51,7 @@ func motion(delta: float) -> void:
 	velocity.x = temp_velocity.x
 	velocity.z = temp_velocity.y
 	
-	if is_on_floor():
-		if Input.is_action_just_pressed("jump"):
+	if is_on_floor() and Input.is_action_just_pressed("jump"):
 			velocity.y = jump_force
 	else:
 		velocity.y -= gravity * delta
