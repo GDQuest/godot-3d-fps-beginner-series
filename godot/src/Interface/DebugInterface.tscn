@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Interface/DebugInterface.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/Sprite-0001.png" type="Texture" id=2]
-[ext_resource path="res://assets/font_source_code_pro.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/art/interface_crosshair.png" type="Texture" id=2]
+[ext_resource path="res://src/Interface/CrosshairMargin.gd" type="Script" id=3]
+[ext_resource path="res://assets/font_source_code_pro.tres" type="DynamicFont" id=4]
 
 [node name="InterfaceLayer" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -12,11 +13,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -16.0
-margin_top = -16.0
-margin_right = 16.0
-margin_bottom = 16.0
+margin_left = -41.0
+margin_top = -44.0
+margin_right = 41.0
+margin_bottom = 44.0
 texture = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_right = 127.0
@@ -27,7 +29,7 @@ alignment = 1
 margin_top = 22.0
 margin_right = 127.0
 margin_bottom = 63.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "0000"
 align = 1
 
@@ -35,6 +37,6 @@ align = 1
 margin_top = 67.0
 margin_right = 127.0
 margin_bottom = 108.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "0000"
 align = 1

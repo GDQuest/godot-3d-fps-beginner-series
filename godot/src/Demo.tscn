@@ -1,11 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Demo.gd" type="Script" id=1]
-[ext_resource path="res://src/Effects/ShotImpact.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Effects/ShotParticles.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Interface/DebugInterface.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/DemoEnvironment.tres" type="Environment" id=6]
+[ext_resource path="res://src/Interface/DebugInterface.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/DemoEnvironment.tres" type="Environment" id=4]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 50, 1, 50 )
@@ -27,12 +25,10 @@ rim_tint = 0.5
 
 [node name="Demo" type="Spatial"]
 script = ExtResource( 1 )
-hit_effect = ExtResource( 2 )
-hit_particle = ExtResource( 3 )
 
-[node name="InterfaceLayer" parent="." instance=ExtResource( 4 )]
+[node name="InterfaceLayer" parent="." instance=ExtResource( 2 )]
 
-[node name="Player" parent="." instance=ExtResource( 5 )]
+[node name="Player" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1612, 12.3324 )
 
 [node name="Ground" type="StaticBody" parent="."]
@@ -112,7 +108,7 @@ shadow_enabled = true
 extents = Vector3( 73.0007, 29.6759, 60.0894 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
-environment = ExtResource( 6 )
+environment = ExtResource( 4 )
 
 [node name="OmniLight" type="OmniLight" parent="Lighting"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.14901, 5.20605, 25.789 )
@@ -141,4 +137,3 @@ light_color = Color( 0.85098, 0.0431373, 0.592157, 1 )
 light_energy = 2.13
 light_indirect_energy = 5.22
 omni_range = 6.5
-[connection signal="shot_fired" from="Player" to="." method="_on_Player_shot_fired"]

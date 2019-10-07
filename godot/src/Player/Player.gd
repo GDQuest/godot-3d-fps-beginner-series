@@ -30,7 +30,6 @@ signal camera_rotation_updated
 signal shot_fired
 
 onready var camera: Camera = $Camera
-onready var ray: RayCast = $Camera/RayCast
 onready var sound: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
 export var move_speed: = 8.0
@@ -58,8 +57,6 @@ func _unhandled_input(event):
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -45, 45)
 	if event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	if event.is_action_pressed("fire") and ray.is_colliding():
-		shoot()
 
 
 func get_horizontal_input()->void:
@@ -92,9 +89,3 @@ func joypad_camera_rotation(delta: float)->void:
 	)
 	rotation_degrees += direction * joypad_rotation_speed * delta
 	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -45, 45)
-
-
-func shoot()->void:
-	camera.screen_kick(2.5, 0.3)
-	emit_signal("shot_fired", ray.get_collision_point(), ray.get_collision_normal())
-	sound.play()

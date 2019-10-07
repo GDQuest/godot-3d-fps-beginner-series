@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Sprite-0001.png-114f64fb6e0554e1a3b4d9b3d090ffd8.stex"
+path="res://.import/interface_crosshair.png-1f6d197451c8810d628e4c3069fb6cac.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/Sprite-0001.png"
-dest_files=[ "res://.import/Sprite-0001.png-114f64fb6e0554e1a3b4d9b3d090ffd8.stex" ]
+source_file="res://assets/art/interface_crosshair.png"
+dest_files=[ "res://.import/interface_crosshair.png-1f6d197451c8810d628e4c3069fb6cac.stex" ]
 
 [params]
 
