@@ -6,7 +6,7 @@
 [ext_resource path="res://src/DemoEnvironment.tres" type="Environment" id=4]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 50, 1, 50 )
+extents = Vector3( 50, 0.51, 50 )
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 100, 1, 100 )
@@ -32,7 +32,6 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1612, 12.3324 )
 
 [node name="Ground" type="StaticBody" parent="."]
-editor/display_folded = true
 collision_layer = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="Ground"]

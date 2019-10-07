@@ -1,11 +1,7 @@
 extends Node
-
 """
-This is the main script for the Demo scene.  This accepts a signal
-from the player to generate a decal at a set position with a rotation
-that points along the raycast's collision normal.
-
-Feedback is appreciated.
+Class that handles the shooting of a raycast weapon, and spawns a decal and
+fires a particle effect at the intersection of the camera raycast.
 """
 
 
@@ -33,7 +29,8 @@ func shoot() -> void:
 
 func generate_hit_effect(hit_position: Vector3, hit_direction: Vector3) -> void:
 	var temp = hit_effect.instance()
-	#note: we offset along the normal a little bit to prevent Z-fighting with the surface that got hit
+	
+	#offset the position along the normal a little bit to prevent Z-fighting with the surface that got hit
 	temp.look_at_from_position(hit_position + (hit_direction*0.001), hit_position + hit_direction, Vector3.UP)
 	get_tree().root.add_child(temp)
 
