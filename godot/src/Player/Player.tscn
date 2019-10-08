@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/Player/Camera.gd" type="Script" id=2]
-[ext_resource path="res://assets/art/dark-shoot.wav" type="AudioStream" id=3]
+[ext_resource path="res://src/Player/Weapon.gd" type="Script" id=3]
+[ext_resource path="res://src/Effects/ShotImpact.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Effects/ShotParticles.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/art/dark-shoot.wav" type="AudioStream" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.4
@@ -12,11 +15,11 @@ collision_mask = 6
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 1, 0 )
 shape = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 1.5, 0 )
+transform = Transform( -1, 0, -8.74228e-008, 0, 1, 0, 8.74228e-008, 0, -1, 0, 1.5, 0 )
 keep_aspect = 0
 current = true
 fov = 60.0
@@ -33,6 +36,11 @@ cast_to = Vector3( 0, 0, -40 )
 collision_mask = 6
 collide_with_areas = true
 
+[node name="Weapon" type="Node" parent="."]
+script = ExtResource( 3 )
+hit_effect = ExtResource( 4 )
+hit_particle = ExtResource( 5 )
+
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 6 )
 [connection signal="timeout" from="Camera/ShakeTimer" to="Camera" method="_on_ShakeTimer_timeout"]

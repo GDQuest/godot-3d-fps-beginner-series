@@ -1,26 +1,36 @@
 extends Camera
+"""
+Camera controller that handles rotating itself using mouse or right joystick.
+"""
+
 
 onready var shake_tween: = $ShakeTween
 
 export var joypad_rotation_speed: = 2.0
 export var sensitivity: = 0.001
 
+var last_joypad_direction: Vector3
+
+
+func _physics_process(delta: float) -> void:
+	var joypad_direction: = last_joypad_direction * delta
+	rotate_local(joypad_direction.x, joypad_direction.y)
+
 
 func _unhandled_input(event) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rotate_local(-event.relative.y * sensitivity, -event.relative.x * sensitivity)
 	if event is InputEventJoypadMotion:
-		rotate_joypad(get_physics_process_delta_time())
+		rotate_joypad()
 
 
-func rotate_joypad(delta: float)->void:
-	var direction: = Vector3(
+func rotate_joypad() -> void:
+	last_joypad_direction = Vector3(
 		Input.get_action_strength("camera_up") - Input.get_action_strength("camera_down"),
 		Input.get_action_strength("camera_left") - Input.get_action_strength("camera_right"),
 		0.0
 	)
-	var rotation: = direction * joypad_rotation_speed * delta
-	rotate_local(rotation.x, rotation.y)
+	last_joypad_direction = last_joypad_direction * joypad_rotation_speed
 
 
 func screen_kick(intensity: float, duration: float)->void:

@@ -1,18 +1,11 @@
 extends KinematicBody
-
 """
-This is a simple first person controller
-that moves the character in relation to
-the direction the camera is pointing with
-WASD and the left joystick.
+This is a simple first person controller that moves the character in relation
+to the direction the camera is pointing with WASD or the left joystick.
 """
 
-
-signal camera_rotation_updated
-signal shot_fired
 
 onready var camera: Camera = $Camera
-onready var ray: RayCast = $Camera/RayCast
 onready var sound: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
 export var move_speed: = 8.0
@@ -27,14 +20,11 @@ var horizontal_move: = Vector3.ZERO
 func _physics_process(delta) -> void:
 	get_horizontal_input()
 	motion(delta)
-	emit_signal("camera_rotation_updated", camera.rotation_degrees)
 
 
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	if event.is_action_pressed("fire") and ray.is_colliding():
-		shoot()
 
 
 func get_horizontal_input() -> void:
@@ -56,9 +46,3 @@ func motion(delta: float) -> void:
 	else:
 		velocity.y -= gravity * delta
 	move_and_slide(velocity, Vector3.UP)
-
-
-func shoot()->void:
-	camera.screen_kick(2.5, 0.3)
-	emit_signal("shot_fired", ray.get_collision_point(), ray.get_collision_normal())
-	sound.play()

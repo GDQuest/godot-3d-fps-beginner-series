@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/bullethole.png-1fd54aa7139d294c988a322c54a27b24.s3tc.stex"
-path.etc2="res://.import/bullethole.png-1fd54aa7139d294c988a322c54a27b24.etc2.stex"
+path.s3tc="res://.import/scorchmark.png-ecae7a43fb752ba3fae2395e9f660abd.s3tc.stex"
+path.etc2="res://.import/scorchmark.png-ecae7a43fb752ba3fae2395e9f660abd.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/art/bullethole.png"
-dest_files=[ "res://.import/bullethole.png-1fd54aa7139d294c988a322c54a27b24.s3tc.stex", "res://.import/bullethole.png-1fd54aa7139d294c988a322c54a27b24.etc2.stex" ]
+source_file="res://assets/art/scorchmark.png"
+dest_files=[ "res://.import/scorchmark.png-ecae7a43fb752ba3fae2395e9f660abd.s3tc.stex", "res://.import/scorchmark.png-ecae7a43fb752ba3fae2395e9f660abd.etc2.stex" ]
 
 [params]
 
@@ -22,7 +22,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=true
-flags/filter=false
+flags/filter=true
 flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=2
