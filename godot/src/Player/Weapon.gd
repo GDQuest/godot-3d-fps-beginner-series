@@ -5,37 +5,45 @@ fires a particle effect at the intersection of the camera raycast.
 """
 
 
+onready var cooldown: Timer = $Cooldown
+
 export var hit_effect: PackedScene
 export var hit_particle: PackedScene
 
 var ray: RayCast
 
 
-func _unhandled_input(event) -> void:
-	if not ray:
-		ray = owner.camera.get_node("RayCast")
-	if event.is_action_pressed("fire") and ray.is_colliding():
+func _ready() -> void:
+	yield(owner, "ready")
+	ray = owner.camera.get_node("RayCast")
+
+
+func _physics_process(delta: float) -> void:
+	if Input.is_action_pressed("fire") and cooldown.is_stopped():
 		shoot()
 
 
 func shoot() -> void:
-	owner.camera.screen_kick(2.5, 0.3)
-	var hit_position: Vector3 = ray.get_collision_point()
-	var hit_direction: Vector3 = ray.get_collision_normal()
-	generate_hit_effect(hit_position, hit_direction)
-	generate_hit_particle(hit_position, hit_direction)
+	cooldown.start()
+	if ray.is_colliding():
+		var hit_position: = ray.get_collision_point()
+		var hit_direction: = ray.get_collision_normal()
+		generate_hit_effect(hit_position, hit_direction)
+	owner.camera.screen_kick(2.5, 0.2)
+	owner.sound.pitch_scale = 1.0 + randf() / 20.0
 	owner.sound.play()
 
 
 func generate_hit_effect(hit_position: Vector3, hit_direction: Vector3) -> void:
-	var temp = hit_effect.instance()
-	
-	#offset the position along the normal a little bit to prevent Z-fighting with the surface that got hit
-	temp.look_at_from_position(hit_position + (hit_direction*0.001), hit_position + hit_direction, Vector3.UP)
-	get_tree().root.add_child(temp)
+	var decal = hit_effect.instance()
+	decal.set_as_toplevel(true)
 
+	var particles: = hit_particle.instance()
+	particles.set_as_toplevel(true)
 
-func generate_hit_particle(hit_position: Vector3, hit_direction: Vector3) -> void:
-	var temp = hit_particle.instance()
-	temp.global_transform.origin = hit_position
-	get_tree().root.add_child(temp)
+	add_child(decal)
+	add_child(particles)
+
+	# Offset the position along the normal a little bit to prevent Z-fighting with the surface that got hit
+	decal.look_at_from_position(hit_position + (hit_direction*0.001), hit_position + hit_direction, Vector3.UP)
+	particles.global_transform.origin = hit_position

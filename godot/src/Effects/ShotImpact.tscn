@@ -3,5 +3,6 @@
 [ext_resource path="res://assets/art/scorchmark.png" type="Texture" id=1]
 
 [node name="ShotImpact" type="Sprite3D"]
+transform = Transform( 0.575637, 0, 0, 0, 0.575637, 0, 0, 0, 0.575637, 0, 0, 0 )
 shaded = true
 texture = ExtResource( 1 )
