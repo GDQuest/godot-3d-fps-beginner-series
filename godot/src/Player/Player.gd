@@ -8,18 +8,19 @@ to the direction the camera is pointing with WASD or the left joystick.
 onready var camera: Camera = $Camera
 onready var sound: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
-export var move_speed: = 8.0
+export var speed_move: = 8.0
+export var speed_sprint: = 14.0
 export var gravity: = 100.0
 export var jump_force: = 30.0
 export var hit_decal: PackedScene
 
 var velocity: = Vector3.ZERO
-var horizontal_move: = Vector3.ZERO
+var direction: = Vector3.ZERO
 
 
 func _physics_process(delta) -> void:
-	get_horizontal_input()
-	motion(delta)
+	var direction: = get_input_direction()
+	move(delta, direction, Input.is_action_pressed("sprint"))
 
 
 func _unhandled_input(event) -> void:
@@ -27,16 +28,18 @@ func _unhandled_input(event) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
-func get_horizontal_input() -> void:
-	horizontal_move = Vector3.ZERO
-	horizontal_move += camera.global_transform.basis.x * (Input.get_action_strength("strafe_right") 
+func get_input_direction() -> Vector3:
+	var direction: = Vector3.ZERO
+	direction += camera.global_transform.basis.x * (Input.get_action_strength("strafe_right") 
 		- Input.get_action_strength("strafe_left"))
-	horizontal_move += camera.global_transform.basis.z * (Input.get_action_strength("back") 
+	direction += camera.global_transform.basis.z * (Input.get_action_strength("back") 
 		- Input.get_action_strength("forward"))
+	return direction
 
 
-func motion(delta: float) -> void:
-	var temp_velocity = Vector2(horizontal_move.x, horizontal_move.z).normalized() * move_speed
+func move(delta: float, direction: Vector3, is_sprinting: bool = false) -> void:
+	var temp_velocity = Vector2(direction.x, direction.z).normalized()
+	temp_velocity *= speed_sprint if is_sprinting else speed_move
 	
 	velocity.x = temp_velocity.x
 	velocity.z = temp_velocity.y
