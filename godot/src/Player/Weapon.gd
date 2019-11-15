@@ -1,4 +1,4 @@
-extends Node
+extends RayCast
 """
 Class that handles the shooting of a raycast weapon, and spawns a decal and
 fires a particle effect at the intersection of the camera raycast.
@@ -7,15 +7,8 @@ fires a particle effect at the intersection of the camera raycast.
 
 onready var cooldown: Timer = $Cooldown
 
-export var hit_effect: PackedScene
-export var hit_particle: PackedScene
-
-var ray: RayCast
-
-
-func _ready() -> void:
-	yield(owner, "ready")
-	ray = owner.camera.get_node("RayCast")
+export var shot_impact: PackedScene
+export var shot_particles: PackedScene
 
 
 func _physics_process(delta: float) -> void:
@@ -25,20 +18,20 @@ func _physics_process(delta: float) -> void:
 
 func shoot() -> void:
 	cooldown.start()
-	if ray.is_colliding():
-		var hit_position: = ray.get_collision_point()
-		var hit_direction: = ray.get_collision_normal()
-		generate_hit_effect(hit_position, hit_direction)
+	if is_colliding():
+		var hit_position: = get_collision_point()
+		var hit_direction: = get_collision_normal()
+		generate_shot_impact(hit_position, hit_direction)
 	owner.camera.screen_kick(2.5, 0.2)
 	owner.sound.pitch_scale = 1.0 + randf() / 20.0
 	owner.sound.play()
 
 
-func generate_hit_effect(hit_position: Vector3, hit_direction: Vector3) -> void:
-	var decal = hit_effect.instance()
+func generate_shot_impact(hit_position: Vector3, hit_direction: Vector3) -> void:
+	var decal = shot_impact.instance()
 	decal.set_as_toplevel(true)
 
-	var particles: = hit_particle.instance()
+	var particles: = shot_particles.instance()
 	particles.set_as_toplevel(true)
 
 	add_child(decal)

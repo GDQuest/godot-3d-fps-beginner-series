@@ -30,18 +30,19 @@ wait_time = 0.05
 
 [node name="ShakeTween" type="Tween" parent="Camera"]
 
-[node name="RayCast" type="RayCast" parent="Camera"]
+[node name="Weapon" type="RayCast" parent="Camera"]
 enabled = true
 cast_to = Vector3( 0, 0, -40 )
 collision_mask = 6
 collide_with_areas = true
-
-[node name="Weapon" type="Node" parent="."]
 script = ExtResource( 3 )
-hit_effect = ExtResource( 4 )
-hit_particle = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": ""
+}
+shot_impact = ExtResource( 4 )
+shot_particles = ExtResource( 5 )
 
-[node name="Cooldown" type="Timer" parent="Weapon"]
+[node name="Cooldown" type="Timer" parent="Camera/Weapon"]
 wait_time = 0.06
 one_shot = true
 
