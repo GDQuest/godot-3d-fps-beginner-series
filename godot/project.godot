@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="FPS beginner demo"
+config/name="Your First 3D FPS in Godot"
 run/main_scene="res://src/Demo.tscn"
 config/icon="res://icon.png"
 
