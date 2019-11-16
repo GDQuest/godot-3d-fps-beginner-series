@@ -9,39 +9,40 @@ onready var shake_tween: = $ShakeTween
 export var joypad_rotation_speed: = 2.0
 export var sensitivity: = 0.001
 
-var last_joypad_direction: Vector3
+var input_direction: Vector2
 
 
 func _physics_process(delta: float) -> void:
-	var joypad_direction: = last_joypad_direction * delta
-	rotate_local(joypad_direction.x, joypad_direction.y)
+	rotate_local(input_direction * delta)
 
 
 func _unhandled_input(event) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		rotate_local(-event.relative.y * sensitivity, -event.relative.x * sensitivity)
+		var direction: = Vector2(
+			-event.relative.y * sensitivity,
+			-event.relative.x * sensitivity
+		)
+		rotate_local(direction)
 	if event is InputEventJoypadMotion:
-		rotate_joypad()
+		input_direction = get_joypad_input_direction()
 
 
-func rotate_local(x_axis_delta: float, y_axis_delta: float) -> void:
-	rotate_object_local(Vector3(1,0,0), x_axis_delta)
-	rotate_object_local(Vector3(0,1,0), y_axis_delta)
+func rotate_local(direction: Vector2) -> void:
+	rotate_object_local(Vector3.RIGHT, direction.x)
+	rotate_object_local(Vector3.UP, direction.y)
 	rotation_degrees.z = 0
 
 
-func rotate_joypad() -> void:
-	last_joypad_direction = Vector3(
+func get_joypad_input_direction() -> Vector2:
+	return Vector2(
 		Input.get_action_strength("camera_up") - Input.get_action_strength("camera_down"),
-		Input.get_action_strength("camera_left") - Input.get_action_strength("camera_right"),
-		0.0
+		Input.get_action_strength("camera_left") - Input.get_action_strength("camera_right")
 	)
-	last_joypad_direction = last_joypad_direction * joypad_rotation_speed
 
 
 func screen_kick(intensity: float, duration: float)->void:
-	var temp_intensity = rand_range(intensity / 2.0, intensity)
-	var temp_rotation = rotation_degrees + Vector3(temp_intensity, 0,  0)
-	shake_tween.interpolate_property(self, "rotation_degrees", rotation_degrees, 
-		temp_rotation, duration, Tween.TRANS_CIRC, Tween.EASE_OUT)
-	shake_tween.start()
+	var direction_offset: = Vector2(
+		rand_range(-intensity, intensity),
+		rand_range(-intensity, intensity)
+	)
+	rotate_local(direction_offset)
