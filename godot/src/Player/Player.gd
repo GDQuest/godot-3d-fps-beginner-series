@@ -12,7 +12,6 @@ export var speed_move: = 8.0
 export var speed_sprint: = 14.0
 export var gravity: = 100.0
 export var jump_force: = 30.0
-export var hit_decal: PackedScene
 
 var velocity: = Vector3.ZERO
 var direction: = Vector3.ZERO
