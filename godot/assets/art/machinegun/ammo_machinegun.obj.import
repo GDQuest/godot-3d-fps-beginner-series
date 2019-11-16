@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/ammo_machinegun.obj-e73361a2d17ea1a9767d0684356820ca.mesh"
+
+[deps]
+
+files=[ "res://.import/ammo_machinegun.obj-e73361a2d17ea1a9767d0684356820ca.mesh" ]
+
+source_file="res://assets/art/machinegun/ammo_machinegun.obj"
+dest_files=[ "res://.import/ammo_machinegun.obj-e73361a2d17ea1a9767d0684356820ca.mesh", "res://.import/ammo_machinegun.obj-e73361a2d17ea1a9767d0684356820ca.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true
