@@ -4,8 +4,6 @@ Camera controller that handles rotating itself using mouse or right joystick.
 """
 
 
-onready var shake_tween: = $ShakeTween
-
 export var joypad_rotation_speed: = 2.0
 export var sensitivity: = 0.001
 
