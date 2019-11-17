@@ -7,6 +7,7 @@ to the direction the camera is pointing with WASD or the left joystick.
 
 onready var camera: Camera = $Camera
 onready var sound: AudioStreamPlayer3D = $AudioStreamPlayer3D
+onready var weapon: = $Camera/Weapon
 
 export var speed_move: = 8.0
 export var speed_sprint: = 14.0
@@ -15,6 +16,14 @@ export var jump_force: = 30.0
 
 var velocity: = Vector3.ZERO
 var direction: = Vector3.ZERO
+
+
+func _ready() -> void:
+	weapon.connect("shot", self, "_on_Weapon_shot")
+
+
+func _on_Weapon_shot() -> void:
+	camera.screen_kick(0.01, 0.2)
 
 
 func _physics_process(delta) -> void:

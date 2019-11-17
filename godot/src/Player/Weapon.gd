@@ -4,6 +4,7 @@ Class that handles the shooting of a raycast weapon, and spawns a decal and
 fires a particle effect at the intersection of the camera raycast.
 """
 
+signal shot
 
 onready var cooldown: Timer = $Cooldown
 
@@ -22,9 +23,9 @@ func shoot() -> void:
 		var hit_position: = get_collision_point()
 		var hit_direction: = get_collision_normal()
 		generate_shot_impact(hit_position, hit_direction)
-	owner.camera.screen_kick(0.01, 0.2)
 	owner.sound.pitch_scale = 1.0 + randf() / 20.0
 	owner.sound.play()
+	emit_signal("shot")
 
 
 func generate_shot_impact(hit_position: Vector3, hit_direction: Vector3) -> void:
