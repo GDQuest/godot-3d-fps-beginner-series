@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Effects/ShotImpact.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Player/Weapon.gd" type="Script" id=2]
 [ext_resource path="res://src/Effects/ShotParticles.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/art/machinegun/machinegun.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://src/DemoEnvironment.tres" type="Environment" id=5]
+[ext_resource path="res://assets/art/dark-shoot.wav" type="AudioStream" id=6]
 
 [sub_resource type="World" id=1]
 environment = ExtResource( 5 )
@@ -95,3 +96,6 @@ material/43 = null
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )

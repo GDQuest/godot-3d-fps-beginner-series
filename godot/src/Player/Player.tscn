@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/Player/Camera.gd" type="Script" id=2]
 [ext_resource path="res://src/Player/Weapon.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/art/dark-shoot.wav" type="AudioStream" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.4
@@ -29,13 +28,6 @@ wait_time = 0.05
 [node name="ShakeTween" type="Tween" parent="Camera"]
 
 [node name="Weapon" parent="Camera" instance=ExtResource( 3 )]
-
-[node name="Viewport" parent="Camera/Weapon/ViewportContainer" index="0"]
-size = Vector2( 1280, 720 )
-render_target_update_mode = 3
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource( 6 )
 [connection signal="timeout" from="Camera/ShakeTimer" to="Camera" method="_on_ShakeTimer_timeout"]
 
 [editable path="Camera/Weapon"]

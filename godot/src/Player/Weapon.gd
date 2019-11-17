@@ -7,6 +7,7 @@ fires a particle effect at the intersection of the camera raycast.
 signal shot
 
 onready var cooldown: Timer = $Cooldown
+onready var sound: AudioStreamPlayer = $AudioStreamPlayer
 
 export var shot_impact: PackedScene
 export var shot_particles: PackedScene
@@ -23,9 +24,9 @@ func shoot() -> void:
 		var hit_position: = get_collision_point()
 		var hit_direction: = get_collision_normal()
 		generate_shot_impact(hit_position, hit_direction)
-	owner.sound.pitch_scale = 1.0 + randf() / 20.0
-	owner.sound.play()
 	emit_signal("shot")
+	sound.pitch_scale = 1.0 + randf() / 20.0
+	sound.play()
 
 
 func generate_shot_impact(hit_position: Vector3, hit_direction: Vector3) -> void:
