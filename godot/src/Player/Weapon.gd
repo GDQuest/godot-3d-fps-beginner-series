@@ -1,3 +1,4 @@
+tool
 extends RayCast
 """
 Class that handles the shooting of a raycast weapon, and spawns a decal and
@@ -11,6 +12,10 @@ onready var sound: AudioStreamPlayer = $AudioStreamPlayer
 
 export var shot_impact: PackedScene
 export var shot_particles: PackedScene
+
+
+func _get_configuration_warning() -> String:
+	return "" if shot_impact and shot_particles else "Shot Impact and Shot Particles properties must be set"
 
 
 func _physics_process(delta: float) -> void:
