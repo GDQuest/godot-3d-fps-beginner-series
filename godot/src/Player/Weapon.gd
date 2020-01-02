@@ -1,9 +1,7 @@
 tool
 extends RayCast
-"""
-Class that handles the shooting of a raycast weapon, and spawns a decal and
-fires a particle effect at the intersection of the camera raycast.
-"""
+# Class that handles the shooting of a raycast weapon, and spawns a decal and
+# fires a particle effect at the intersection of the camera raycast.
 
 signal shot
 

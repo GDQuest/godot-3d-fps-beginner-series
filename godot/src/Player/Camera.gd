@@ -1,7 +1,5 @@
 extends Camera
-"""
-Camera controller that handles rotating itself using mouse or right joystick.
-"""
+# Camera controller that handles rotating itself using mouse or right joystick.
 
 
 export var joypad_rotation_speed: = 2.0

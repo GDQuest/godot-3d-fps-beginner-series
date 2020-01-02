@@ -1,8 +1,6 @@
 extends KinematicBody
-"""
-This is a simple first person controller that moves the character in relation
-to the direction the camera is pointing with WASD or the left joystick.
-"""
+# This is a simple first person controller that moves the character in relation
+# to the direction the camera is pointing with WASD or the left joystick.
 
 
 onready var camera: Camera = $Camera
